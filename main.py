@@ -1,6 +1,12 @@
-def main():
-    print("Hello from og-images!")
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+async def read_root():
+    return {"Hello": "World"}
 
 
-if __name__ == "__main__":
-    main()
+@app.get("/items/{item_id}")
+async def read_item(item_id: int, q: str | None = None):
+    return {"item_id": item_id, "q": q}

@@ -1,7 +1,13 @@
 [project]
-name = "RecordRanks OG images"
+name = "recordranks-og-images"
 version = "0.1.0"
 description = "Service for generating OG images for RecordRanks"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "fastapi[standard]>=0.141.1",
+    "pillow>=12.3.0",
+]
+
+[tool.fastapi]
+    entrypoint = "main:app"
