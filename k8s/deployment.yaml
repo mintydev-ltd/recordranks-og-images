@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recordranks-og-images
+  labels:
+    app: recordranks-og-images
+spec:
+  replicas: 2
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: recordranks-og-images
+  template:
+    metadata:
+      labels:
+        app: recordranks-og-images
+    spec:
+      containers:
+        - name: og-images
+          image: ghcr.io/mintydev-ltd/recordranks-og-images:latest
+          imagePullPolicy: Always
+          ports:
+            - name: og-images-port
+              containerPort: 80
+          env:
+            - name: PRODUCTION_APP_URL
+              value: __PRODUCTION_APP_URL__ # substituted in start-prod.sh
