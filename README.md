@@ -12,15 +12,15 @@ The configuration is just a `.env` file:
 
 ## Docker
 
-Build and run it with Docker. In production, you can run it using the existing RecordRanks Kubernetes setup.
+Build it with Docker and run it with Kubernetes in production, using the `start-prod.sh` script.
 
 ```bash
 docker build -t recordranks-og-images .
 
-docker run --rm -p 3050:80 -e PRODUCTION_APP_URL=https://example.com recordranks-og-images
+./start-prod.sh
 ```
 
-The service itself listens on port `80` (though it's exposed on port `3050` above). It simply takes the full path of the page you want to get an image preview of, and then returns an image blob. It only accepts public RecordRanks pages (e.g. competitions, rankings, records, etc.). The space ID parameter is required, even for instances with multi-tenancy disabled. You should host this service under a subdomain (e.g. `og-images.example.com`), with your proxy forwarding requests to the Docker container/Kubernetes pod.
+The container itself listens on port `80`, but the K8s service exposes it on port `31050`. It simply takes the full path of the page you want to get an image preview of, and then returns an image blob. It only accepts public RecordRanks pages (e.g. competitions, rankings, records, etc.). The space ID parameter is required, even for instances with multi-tenancy disabled. You should host this service under a subdomain (e.g. `og-images.example.com`), with your proxy forwarding requests to the Kubernetes service.
 
 ## Example
 
