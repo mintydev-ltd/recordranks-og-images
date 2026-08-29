@@ -18,7 +18,7 @@ CACHE_TTL = 3600  # 1 hour
 @app.get("/{path:path}")
 async def read_root(request: Request, path: str):
     # Regex taken from https://github.com/mintydev789/RecordRanks/blob/main/client/proxy.ts
-    if not re.match(r'^[^/]+(\/|\/(about|competitions|export|moderator-instructions|blog|rankings|records|rules|video-based-results)(\/.*)?)?$', path):
+    if not re.match(r'^[^/]+(\/|\/(about|competitions|export|moderator-instructions|blog|rankings|records|persons|rules|video-based-results)(\/.*)?)?$', path):
         return Response(
             content=f"Error: Unsupported path: {path}",
             media_type="text/plain",
